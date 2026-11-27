@@ -81,7 +81,7 @@ function Test-Pnpm {
     Write-Fail 'pnpm not found.'
     Write-Host '    Install it with Corepack (bundled with Node.js):' -ForegroundColor Yellow
     Write-Host '      corepack enable' -ForegroundColor Yellow
-    Write-Host '      corepack prepare pnpm@10.18.0 --activate' -ForegroundColor Yellow
+    Write-Host '      corepack prepare pnpm@10.34.9 --activate' -ForegroundColor Yellow
     Write-Host '    or see https://pnpm.io/installation' -ForegroundColor Yellow
     return $false
   }

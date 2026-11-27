@@ -2,7 +2,7 @@
   "name": "davinci-resolve-mcp-site",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.18.0",
+  "packageManager": "pnpm@10.34.9",
   "scripts": {
     "sync": "node scripts/sync-public.mjs",
     "dev": "node scripts/sync-public.mjs && astro dev",

@@ -8,7 +8,7 @@
 FROM node:22-alpine AS build
 WORKDIR /repo
 
-RUN corepack enable && corepack prepare pnpm@10.18.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.34.9 --activate
 
 COPY site/package.json site/pnpm-lock.yaml site/
 RUN pnpm --dir site install --frozen-lockfile
