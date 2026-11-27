@@ -1,0 +1,15 @@
+{
+  "about": "Vertical 30-second recipe short with smart reframe and subtitles.",
+  "tool": "workflow_create_social_content",
+  "arguments": {
+    "projectName": "Pasta in 30s",
+    "footageFolder": "C:\\Users\\you\\Videos\\Pasta",
+    "platform": "tiktok",
+    "targetSeconds": 30,
+    "smartReframe": true,
+    "generateSubtitles": true,
+    "render": true,
+    "exportPreset": "tiktok",
+    "dryRun": true
+  }
+}
