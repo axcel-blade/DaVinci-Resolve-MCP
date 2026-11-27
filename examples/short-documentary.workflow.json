@@ -1,0 +1,17 @@
+{
+  "about": "15-minute interview-led documentary: interviews first, B-roll interleaved, Resolve transcription, natural grade.",
+  "tool": "workflow_create_documentary",
+  "arguments": {
+    "projectName": "The Last Lighthouse Keeper",
+    "footageFolder": "C:\\Users\\you\\Videos\\Lighthouse",
+    "targetSeconds": 900,
+    "interviewKeywords": [
+      "interview",
+      "a-cam"
+    ],
+    "transcribe": "resolve",
+    "look": "natural_documentary",
+    "render": false,
+    "dryRun": true
+  }
+}

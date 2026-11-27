@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "davinci-resolve": {
+      "command": "node",
+      "args": ["/absolute/path/to/DaVinci-Resolve-MCP/dist/index.js"],
+      "env": {
+        "RESOLVE_ADAPTER": "python",
+        "RESOLVE_PYTHON": "python3",
+        "RESOLVE_AUTO_LAUNCH": "true",
+        "ALLOWED_WRITE_PATHS": "/Users/YOU/Movies/ResolveMCP;/absolute/path/to/DaVinci-Resolve-MCP/output",
+        "LOG_LEVEL": "info"
+      }
+    }
+  }
+}

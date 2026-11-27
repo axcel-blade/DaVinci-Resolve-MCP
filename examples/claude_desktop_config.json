@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "davinci-resolve": {
+      "command": "node",
+      "args": [
+        "C:path\toDaVinci-Resolve-MCPdistindex.js"
+      ],
+      "env": {
+        "RESOLVE_ADAPTER": "python",
+        "ALLOWED_WRITE_PATHS": "C:UsersyouVideosResolveMCP",
+        "RESOLVE_AUTO_LAUNCH": "false",
+        "LOG_LEVEL": "info"
+      }
+    }
+  }
+}

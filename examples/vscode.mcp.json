@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "davinci-resolve": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:path\toDaVinci-Resolve-MCPdistindex.js"
+      ],
+      "env": {
+        "RESOLVE_ADAPTER": "python",
+        "ALLOWED_WRITE_PATHS": "C:UsersyouVideosResolveMCP"
+      }
+    }
+  }
+}
