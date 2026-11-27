@@ -1,0 +1,31 @@
+title: "[Show] "
+labels: ["show-and-tell"]
+body:
+  - type: textarea
+    id: built
+    attributes:
+      label: What I built
+      description: A timeline edit, color grade, render workflow... made with DaVinci Resolve MCP.
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt or brief
+      description: What you asked the AI (Claude, ChatGPT, ...) to do.
+  - type: textarea
+    id: images
+    attributes:
+      label: Screenshots / exports
+      description: Drag in stills, short clips or screenshots of the DaVinci Resolve timeline.
+  - type: textarea
+    id: tips
+    attributes:
+      label: Tips for others
+      description: Tools, wording or settings that worked well.
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: DaVinci Resolve MCP, DaVinci Resolve and AI client versions.
+      placeholder: "DaVinci Resolve MCP 1.0.0, DaVinci Resolve 20.x, Claude Desktop"
