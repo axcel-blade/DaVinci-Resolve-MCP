@@ -12,6 +12,9 @@
 - Pages workflow enables GitHub Pages automatically; build emits source maps.
 - `scripts/gen-tool-docs.ts` (with `src/utils/zod-json.ts`) generates `docs/TOOLS.md` from source, with status, kind, JSON input schema and an example per tool; `pnpm docs:tools` runs it.
 
+### Fixed
+- The server name and version are read from `package.json` instead of being hardcoded, so `--version` and the MCP server info match the release (the Release workflow's version check failed for 1.1.0).
+
 ### Removed
 - Files with no Photoshop-MCP counterpart: `docs/EXAMPLES.md`, `docs/TIMECODE.md`, the `examples/` folder (also dropped from the release package) and the old `scripts/gen-docs.mjs` generator.
 

@@ -1,11 +1,14 @@
+import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const SERVER_NAME = "davinci-resolve-mcp";
-export const SERVER_VERSION = "1.0.0";
-
 /** Repository root (works from src/ via tsx and from dist/ after build). */
 export const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
+
+/** Name and version come from package.json so releases only bump one file. */
+const PKG = JSON.parse(readFileSync(resolve(PROJECT_ROOT, "package.json"), "utf8")) as { name: string; version: string };
+export const SERVER_NAME = PKG.name;
+export const SERVER_VERSION = PKG.version;
 export const PYTHON_DIR = resolve(PROJECT_ROOT, "resolve-scripts");
 export const LUA_DIR = resolve(PROJECT_ROOT, "resolve-scripts");
 
