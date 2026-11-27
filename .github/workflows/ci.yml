@@ -63,7 +63,7 @@ jobs:
         shell: pwsh
         run: |
           $bad = 0
-          Get-ChildItem scripts, installerswindows -Filter *.ps1 | ForEach-Object {
+          Get-ChildItem scripts, installers/windows -Filter *.ps1 | ForEach-Object {
             $errors = $null
             [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$errors) | Out-Null
             if ($errors) { $bad++; $errors | ForEach-Object { Write-Host "$($_.Extent.File):$($_.Extent.StartLineNumber) $($_.Message)" } }
