@@ -1,5 +1,5 @@
 import { join } from "node:path";
-import type { ToolContext } from "../mcp/tools/common.js";
+import type { ToolContext } from "../mcp/tools/registry.js";
 import { logger } from "./logger.js";
 
 function stamp(): string {

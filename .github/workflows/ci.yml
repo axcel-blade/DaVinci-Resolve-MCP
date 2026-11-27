@@ -54,16 +54,16 @@ jobs:
         env:
           LOG_LEVEL: error
         run: |
-          node scripts/gen-docs.mjs
+          pnpm docs:tools
           git diff --exit-code -- docs/TOOLS.md
-          if ($LASTEXITCODE -ne 0) { Write-Error "Run 'node scripts/gen-docs.mjs' and commit the result"; exit 1 }
+          if ($LASTEXITCODE -ne 0) { Write-Error "Run 'pnpm docs:tools' and commit the result"; exit 1 }
 
       - name: PowerShell script syntax
         if: matrix.node == 22
         shell: pwsh
         run: |
           $bad = 0
-          Get-ChildItem scripts, installers/windows -Filter *.ps1 | ForEach-Object {
+          Get-ChildItem scripts, resolve-scripts, installers/windows -Filter *.ps1 | ForEach-Object {
             $errors = $null
             [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$errors) | Out-Null
             if ($errors) { $bad++; $errors | ForEach-Object { Write-Host "$($_.Extent.File):$($_.Extent.StartLineNumber) $($_.Message)" } }

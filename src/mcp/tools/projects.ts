@@ -2,7 +2,7 @@ import { existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import { backupProject, maybeBackup } from "../../utils/backup.js";
-import { absPath, type ToolRegistry, run } from "./common.js";
+import { absPath, type ToolRegistry, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const name = z.string().min(1).max(255).regex(/^[^\\/:*?"<>|]+$/, "Project names cannot contain \\ / : * ? \" < > |");

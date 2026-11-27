@@ -3,7 +3,7 @@ import { extname } from "node:path";
 import { z } from "zod";
 import { CLIP_COLORS, MARKER_COLORS } from "../../config/constants.js";
 import { probe, sha256File } from "../../utils/media-probe.js";
-import { absPath, clipRef, type ToolRegistry, clean, run } from "./common.js";
+import { absPath, clipRef, type ToolRegistry, clean, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const VIDEO = [".mp4", ".mov", ".avi", ".mxf", ".mkv", ".m4v", ".mts", ".m2ts", ".braw", ".r3d", ".webm"];

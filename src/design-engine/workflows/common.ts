@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { COLOR_PRESETS, EXPORT_PRESETS } from "../presets/presets.js";
-import { absPath } from "../../mcp/tools/common.js";
+import { absPath } from "../../mcp/tools/registry.js";
 import { tool, type StepCtx, type WorkflowStep } from "./engine.js";
 
 export const WorkflowInput = {

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { loadConfig } from "../../src/config/index.js";
 import { JobManager } from "../../src/jobs/job-manager.js";
 import { createAppContext, toolContext } from "../../src/server.js";
-import { toCallResult } from "../../src/mcp/tools/common.js";
+import { toCallResult } from "../../src/mcp/tools/registry.js";
 
 describe("JobManager", () => {
   it("runs jobs in order and reports results", async () => {

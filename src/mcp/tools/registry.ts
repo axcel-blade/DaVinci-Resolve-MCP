@@ -185,22 +185,8 @@ export async function toCallResult(name: string, fn: () => Promise<ToolResult>, 
   }
 }
 
-/* ---------------- shared schemas ---------------- */
-
-export const absPath = z.string().min(3).max(1024).describe("Absolute local file path");
-export const timelineArg = z.string().min(1).max(256).optional().describe("Timeline name or id (default: current timeline)");
-export const clipRef = z.string().min(1).max(1024).describe("Media pool clip id, exact clip name, or file path");
-export const hexColor = z.string().regex(/^#?[0-9a-fA-F]{6}$/).describe("Hex color like #ff8800");
-
-/** Locates a timeline item. Prefer itemId (from timeline_get_clips); otherwise track + 1-based index. */
-export const ItemRef = {
-  timeline: timelineArg,
-  itemId: z.string().optional().describe("Timeline item unique id (from timeline_get_clips)"),
-  trackType: z.enum(["video", "audio", "subtitle"]).default("video"),
-  trackIndex: z.number().int().min(1).default(1),
-  itemIndex: z.number().int().min(1).default(1).describe("1-based position of the clip on the track (transitions are not counted)"),
-};
-export const ItemRefSchema = z.object(ItemRef);
+/* Shared argument schemas live in ./args.ts (re-exported so tool modules keep one import). */
+export * from "./args.js";
 
 /* ---------------- handler helpers ---------------- */
 
@@ -218,12 +204,3 @@ export async function run(ctx: ToolContext, op: string, params: object = {}, mes
   };
 }
 
-/** Strip undefined so Python receives only provided keys. */
-export function clean<T extends object>(o: T): T {
-  return Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined)) as T;
-}
-
-/** Extract the timeline item reference fields from tool args. */
-export function itemRef(a: { timeline?: string; itemId?: string; trackType?: string; trackIndex?: number; itemIndex?: number }) {
-  return clean({ timeline: a.timeline, itemId: a.itemId, trackType: a.trackType, trackIndex: a.trackIndex, itemIndex: a.itemIndex });
-}

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { loadConfig } from "../../src/config/index.js";
 import { createAppContext, toolContext } from "../../src/server.js";
 import { buildEditPlan, keepRanges, scoreClips, suggestLook } from "../../src/design-engine/planner/planner.js";
-import { ToolRegistry, toCallResult } from "../../src/mcp/tools/common.js";
+import { ToolRegistry, toCallResult } from "../../src/mcp/tools/registry.js";
 import { McpToolError } from "../../src/utils/errors.js";
 
 const app = createAppContext(loadConfig({ LOG_DIR: "" }, ["node"]));

@@ -4,6 +4,7 @@ import { createInterface } from "node:readline";
 import { PYTHON_DIR } from "../../config/constants.js";
 import { McpToolError } from "../../utils/errors.js";
 import { logger } from "../../utils/logger.js";
+import type { BridgeAdapter } from "./types.js";
 
 interface Pending {
   resolve: (v: unknown) => void;
@@ -24,10 +25,11 @@ export interface PythonBridgeOptions {
  * Calls are serialized: the Resolve scripting API is not safe for concurrent use.
  * A timed-out call kills the worker; the next call starts a fresh one.
  */
-export class PythonBridge {
+export class PythonBridge implements BridgeAdapter {
+  readonly name = "python" as const;
   private proc?: ChildProcessWithoutNullStreams;
   private ready?: Promise<{ python: string; ops: number }>;
-  private pending = new Map<string, Pending>();
+  private pendingMap = new Map<string, Pending>();
   private seq = 0;
   private chain: Promise<unknown> = Promise.resolve();
   private stderrTail: string[] = [];
@@ -40,8 +42,13 @@ export class PythonBridge {
     this.opts.env = { ...this.opts.env, [key]: value };
   }
 
+  get pending(): number {
+    return this.pendingMap.size;
+  }
+
+  /** @deprecated use pending */
   get pendingCount(): number {
-    return this.pending.size;
+    return this.pendingMap.size;
   }
 
   private start(): Promise<{ python: string; ops: number }> {
@@ -101,10 +108,10 @@ export class PythonBridge {
           resolveReady(this.info);
           return;
         }
-        const p = msg.id ? this.pending.get(msg.id) : undefined;
+        const p = msg.id ? this.pendingMap.get(msg.id) : undefined;
         if (!p) return;
         clearTimeout(p.timer);
-        this.pending.delete(msg.id!);
+        this.pendingMap.delete(msg.id!);
         if (msg.ok) p.resolve(msg.result);
         else p.reject(new McpToolError(msg.error?.code ?? "BRIDGE_EXCEPTION", msg.error?.message ?? "Unknown bridge error", msg.error?.details));
       });
@@ -113,10 +120,10 @@ export class PythonBridge {
   }
 
   private failAll(err: Error): void {
-    for (const [id, p] of this.pending) {
+    for (const [id, p] of this.pendingMap) {
       clearTimeout(p.timer);
       p.reject(err);
-      this.pending.delete(id);
+      this.pendingMap.delete(id);
     }
   }
 
@@ -129,7 +136,7 @@ export class PythonBridge {
       const id = String(++this.seq);
       return new Promise<T>((res, rej) => {
         const timer = setTimeout(() => {
-          this.pending.delete(id);
+          this.pendingMap.delete(id);
           logger.error("bridge timeout; restarting worker", { op, timeoutMs });
           // Detach first so the next call starts a fresh worker immediately.
           if (this.proc === proc) {
@@ -139,7 +146,7 @@ export class PythonBridge {
           proc.kill();
           rej(new McpToolError("TIMEOUT", `Resolve operation '${op}' did not finish within ${timeoutMs} ms.`));
         }, timeoutMs);
-        this.pending.set(id, { resolve: res as (v: unknown) => void, reject: rej, timer, op });
+        this.pendingMap.set(id, { resolve: res as (v: unknown) => void, reject: rej, timer, op });
         proc.stdin.write(JSON.stringify({ id, op, params }) + "\n");
       });
     };

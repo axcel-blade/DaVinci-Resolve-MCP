@@ -27,10 +27,10 @@ pnpm typecheck
 pnpm lint
 pnpm build
 pnpm test
-node scripts/gen-docs.mjs   # if you changed tools
+pnpm docs:tools             # if you changed tools
 ```
 
-If you touched `resolve-scripts/` or the bridge, also run `pnpm test:live` against a running DaVinci Resolve and paste the summary from `output/live-test/live-report.json` into the PR. If you could not run it, say so — the PR will be labelled *unverified in DaVinci Resolve*.
+If you touched `resolve-scripts/` or the bridge, also run `scripts\integration-test.ps1` against a real DaVinci Resolve and paste the summary from `output/live-test/live-report.json` into the PR. If you could not run it, say so — the PR will be labelled *unverified in DaVinci Resolve*.
 
 ## Branches and commits
 

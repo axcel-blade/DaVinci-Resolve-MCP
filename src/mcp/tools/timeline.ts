@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { MARKER_COLORS } from "../../config/constants.js";
-import { absPath, clipRef, ItemRefSchema, timelineArg, type ToolRegistry, clean, run } from "./common.js";
+import { absPath, clipRef, ItemRefSchema, timelineArg, type ToolRegistry, clean, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const tlName = z.string().min(1).max(255);

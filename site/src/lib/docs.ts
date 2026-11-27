@@ -21,13 +21,17 @@ const LAYOUT: Record<string, [group: string, order: number]> = {
   INSTALLATION: ["Get started", 1],
   CONFIGURATION: ["Get started", 2],
   CLIENTS: ["Get started", 3],
-  EXAMPLES: ["Get started", 5],
-  TROUBLESHOOTING: ["Get started", 6],
+  EXAMPLES: ["Get started", 4],
+  TROUBLESHOOTING: ["Get started", 5],
   SUPPORTED_FEATURES: ["Reference", 1],
   API_REFERENCE: ["Reference", 2],
   TOOLS: ["Reference", 3],
-  TIMECODE: ["Reference", 4],
-  LIMITATIONS: ["Reference", 5],
+  COORDINATES: ["Reference", 4],
+  DESIGN_SCHEMA: ["Reference", 5],
+  UI_DESIGN: ["Reference", 6],
+  IMAGE_ASSETS: ["Reference", 7],
+  LIMITATIONS: ["Reference", 8],
+  GAP_ANALYSIS: ["Project", 6],
   ARCHITECTURE: ["Project", 1],
   SECURITY: ["Project", 2],
   DEVELOPMENT: ["Project", 3],
@@ -46,8 +50,10 @@ export const docs: Doc[] = Object.entries(files)
   .sort((a, b) => GROUPS.indexOf(a.group) - GROUPS.indexOf(b.group) || a.order - b.order || a.title.localeCompare(b.title));
 
 export const toolCount = (): number => {
-  const tools = docs.find((d) => d.file === "TOOLS");
-  return tools ? tools.entry.getHeadings().filter((h) => h.depth === 3).length : 0;
+  // TOOLS.md is generated with a "**N tools**" summary line; its headings are modules, not tools.
+  const raw = Object.values(import.meta.glob<string>("../../../docs/TOOLS.md", { query: "?raw", import: "default", eager: true }))[0];
+  const m = raw?.match(/\*\*(\d+) tools\*\*/);
+  return m ? Number(m[1]) : 0;
 };
 
 /** Prefix a site path with the configured base ("/DaVinci-Resolve-MCP"). */

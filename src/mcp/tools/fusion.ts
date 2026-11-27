@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { absPath, hexColor, ItemRef, timelineArg, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { absPath, hexColor, ItemRef, timelineArg, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 
 /** Target composition: a timeline item's comp (default) or the Fusion page's current comp. */
 const CompTarget = { ...ItemRef, source: z.enum(["item", "current"]).default("item"), compIndex: z.number().int().min(1).default(1) };

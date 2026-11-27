@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { z } from "zod";
 import { COLOR_PRESETS } from "../../design-engine/presets/presets.js";
-import { absPath, clipRef, type ToolRegistry, clean, run } from "./common.js";
+import { absPath, clipRef, type ToolRegistry, clean, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const IMAGE = /\.(png|jpe?g|tiff?|exr|dpx|bmp|tga|psd|heic|heif|webp|cr2|cr3|nef|arw|dng|raf|orf|rw2)$/i;

@@ -9,7 +9,7 @@ import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { loadConfig } from "../../src/config/index.js";
 import { createAppContext, toolContext, type AppContext } from "../../src/server.js";
-import { toCallResult } from "../../src/mcp/tools/common.js";
+import { toCallResult } from "../../src/mcp/tools/registry.js";
 
 const OUT = join(process.cwd(), "output", "live-test", "v21");
 const report: { test: string; result: string; note?: string }[] = [];

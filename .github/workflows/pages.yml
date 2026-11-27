@@ -48,6 +48,14 @@ jobs:
           node-version: 22
           cache: pnpm
           cache-dependency-path: site/pnpm-lock.yaml
+      # Enables Pages (Source = GitHub Actions) if it is not on yet; otherwise deploy-pages
+      # fails with "Creating Pages deployment failed ... Not Found". Enabling needs a token
+      # with repo admin rights (RELEASE_TOKEN); GITHUB_TOKEN can only configure an enabled site.
+      - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
+        with:
+          enablement: true
+          token: ${{ secrets.RELEASE_TOKEN || github.token }}
       # The root pnpm-workspace.yaml would otherwise claim site/ and install the root packages.
       - run: pnpm install --frozen-lockfile --ignore-workspace
       - run: pnpm check

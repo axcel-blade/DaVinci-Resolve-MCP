@@ -3,7 +3,7 @@ import { z } from "zod";
 import { isResolveRunning, launchResolve } from "../../resolve/bridge/detect.js";
 import { RESOLVE_PAGES } from "../../config/constants.js";
 import { toolAvailable } from "../../utils/media-probe.js";
-import { type ToolRegistry, run } from "./common.js";
+import { type ToolRegistry, run } from "./registry.js";
 
 export function registerApplication(reg: ToolRegistry): void {
   const category = "application";
@@ -42,7 +42,7 @@ export function registerApplication(reg: ToolRegistry): void {
       const layers: Record<string, unknown> = { resolveInstalled: install.installed, fusionscript: install.fusionscript ?? null, scriptApiFolder: install.scriptApiExists };
       try {
         const s = await ctx.bridge.call<Record<string, unknown>>("app.status", {}, 20000);
-        layers.python = ctx.bridge.python.info?.python;
+        layers.python = ctx.bridge.python?.info?.python;
         layers.connected = s.connected;
         layers.detail = s.error ?? null;
         return { data: layers, status: s.connected ? "ok" : "partial", message: s.connected ? "Scripting connection OK." : `Scripting not connected: ${(s.error as { message?: string })?.message ?? "unknown"}` };
