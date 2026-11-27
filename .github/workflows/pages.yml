@@ -48,7 +48,8 @@ jobs:
           node-version: 22
           cache: pnpm
           cache-dependency-path: site/pnpm-lock.yaml
-      - run: pnpm install --frozen-lockfile
+      # The root pnpm-workspace.yaml would otherwise claim site/ and install the root packages.
+      - run: pnpm install --frozen-lockfile --ignore-workspace
       - run: pnpm check
       - run: pnpm build
       - name: Installers are published

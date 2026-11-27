@@ -7,7 +7,7 @@ WORKDIR /repo
 RUN corepack enable && corepack prepare pnpm@10.34.9 --activate
 
 COPY site/package.json site/pnpm-lock.yaml site/
-RUN pnpm --dir site install --frozen-lockfile
+RUN pnpm --dir site install --frozen-lockfile --ignore-workspace
 
 COPY package.json ./
 COPY docs ./docs
