@@ -50,3 +50,12 @@ describe("MCP server (mock adapter)", () => {
     await client.close();
   });
 });
+
+describe("server version", () => {
+  it("comes from package.json, so a release only bumps one file", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { SERVER_INFO } = await import("../../src/server.js");
+    const pkg = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { name: string; version: string };
+    expect(SERVER_INFO).toEqual({ name: pkg.name, version: pkg.version });
+  });
+});
