@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ItemRef, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { ItemRef, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 
 const LIMIT = "Fusion-based retiming remaps frames inside the clip's composition; the item's length on the timeline is not changed (the API has no speed-change/ripple). For true retime with length change use the Edit page Change Clip Speed.";
 

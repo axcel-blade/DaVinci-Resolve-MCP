@@ -16,13 +16,13 @@
 - [ ] `pnpm lint`
 - [ ] `pnpm build`
 - [ ] `pnpm test`
-- [ ] `node scripts/gen-docs.mjs` (if tools changed)
+- [ ] `pnpm docs:tools` (if tools changed)
 - [ ] `CHANGELOG.md` updated
 - [ ] No `package-lock.json` / `yarn.lock`
 
 ## DaVinci Resolve verification
 
-- [ ] Ran `pnpm test:live` on DaVinci Resolve version: ____ — result: ____
+- [ ] Ran `scripts\integration-test.ps1` on DaVinci Resolve version: ____ — result: ____
 - [ ] Not run (explain why). This PR is **unverified in DaVinci Resolve**.
 
 ## Security

@@ -5,8 +5,7 @@ $ErrorActionPreference = 'Continue'
 Write-Step 'Runtime'
 Test-Node | Out-Null; Test-Pnpm | Out-Null
 Write-Ok "Windows: $([Environment]::OSVersion.VersionString), PowerShell $($PSVersionTable.PSVersion)"
-$py = Get-CommandVersion python
-if ($py) { Write-Ok "Python: $py" } else { Write-Fail 'Python not found on PATH (set RESOLVE_PYTHON in .env to a 64-bit Python 3).' }
+Test-Python | Out-Null
 
 Write-Step 'DaVinci Resolve installation'
 $r = Find-Resolve

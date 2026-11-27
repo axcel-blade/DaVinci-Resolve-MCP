@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { CLIP_COLORS, MARKER_COLORS } from "../../config/constants.js";
-import { clipRef, ItemRef, ItemRefSchema, timelineArg, type ToolContext, type ToolRegistry, type ToolResult, clean, itemRef, run } from "./common.js";
+import { clipRef, ItemRef, ItemRefSchema, timelineArg, type ToolContext, type ToolRegistry, type ToolResult, clean, itemRef, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const frame = z.number().int().min(0);

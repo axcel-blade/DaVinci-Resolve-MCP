@@ -23,7 +23,7 @@
     "test:live": "vitest run --project e2e",
     "test:report": "node tests/integration/run-integration.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "docs:tools": "node scripts/gen-docs.mjs",
+    "docs:tools": "tsx scripts/gen-tool-docs.ts",
     "test:watch": "vitest --project default",
     "lint": "eslint .",
     "pack:release": "node scripts/pack-release.mjs",

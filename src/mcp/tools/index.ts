@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { registerAi } from "./ai.js";
 import { registerApplication } from "./application.js";
 import { registerAudio } from "./audio.js";
@@ -19,7 +20,7 @@ import { registerCinematicWorkflow } from "./workflow-cinematic.js";
 import { registerDocumentaryWorkflow } from "./workflow-documentary.js";
 import { registerSocialWorkflow } from "./workflow-social-media.js";
 import { registerYoutubeWorkflow } from "./workflow-youtube.js";
-import { ToolRegistry } from "./common.js";
+import { ToolRegistry } from "./registry.js";
 
 /** Build the full tool registry (independent of any MCP server instance). */
 export function buildRegistry(): ToolRegistry {
@@ -60,6 +61,12 @@ export function buildRegistry(): ToolRegistry {
     description: "The operation log: recent tool calls with outcome and duration (args redacted).",
     input: {},
     handler: async (_a, ctx) => ({ data: ctx.audit.recent.slice(-50) }),
+  });
+  reg.define({
+    name: "mcp_bridge_status", category: "meta", readOnly: true,
+    description: "Bridge state: active adapter (python | mock), serial queue depth, the operation running now, and the most recent bridge operations with outcome and duration.",
+    input: { limit: z.number().int().min(1).max(200).default(25) },
+    handler: async ({ limit }, ctx) => ({ data: { ...ctx.bridge.status(), recent: ctx.bridge.recent(limit) } }),
   });
   return reg;
 }

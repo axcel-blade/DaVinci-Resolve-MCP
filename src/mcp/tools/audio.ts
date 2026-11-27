@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { loudness, silences } from "../../utils/media-probe.js";
-import { absPath, clipRef, ItemRef, ItemRefSchema, timelineArg, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { absPath, clipRef, ItemRef, ItemRefSchema, timelineArg, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const AudioItem = { ...ItemRef, trackType: z.literal("audio").default("audio") };

@@ -205,13 +205,13 @@ if [[ "$CONFIGURE_CLIENTS" == true ]]; then
   if [[ "${RESOLVE_MCP_SKIP_CLI_CLIENTS:-}" != "1" ]]; then
     if command -v claude >/dev/null 2>&1; then
       claude mcp remove --scope user "$SERVER_NAME" >/dev/null 2>&1 || true
-      if claude mcp add --scope user "$SERVER_NAME" -e RESOLVE_ADAPTER="python" -- node "$ENTRY" >/dev/null 2>&1; then
+      if claude mcp add --scope user "$SERVER_NAME" -e RESOLVE_ADAPTER=python -- node "$ENTRY" >/dev/null 2>&1; then
         ok "Claude Code (user scope)"; CLI_DONE+=("Claude Code")
       else printf '\033[33m  !   Claude Code: "claude mcp add" failed. Add "%s" manually.\033[0m\n' "$SERVER_NAME"; fi
     fi
     if command -v codex >/dev/null 2>&1; then
       codex mcp remove "$SERVER_NAME" >/dev/null 2>&1 || true
-      if codex mcp add "$SERVER_NAME" --env RESOLVE_ADAPTER="python" -- node "$ENTRY" >/dev/null 2>&1; then
+      if codex mcp add "$SERVER_NAME" --env RESOLVE_ADAPTER=python -- node "$ENTRY" >/dev/null 2>&1; then
         ok "Codex"; CLI_DONE+=("Codex"); CODEX_CLI_OK=1
       fi
     fi

@@ -3,7 +3,7 @@ import { basename, dirname, extname, join } from "node:path";
 import { z } from "zod";
 import { probe, toolAvailable } from "../../utils/media-probe.js";
 import { EXPORT_PRESETS } from "../../design-engine/presets/presets.js";
-import { absPath, timelineArg, type ToolContext, type ToolRegistry, type ToolResult, clean, run } from "./common.js";
+import { absPath, timelineArg, type ToolContext, type ToolRegistry, type ToolResult, clean, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 import { logger } from "../../utils/logger.js";
 

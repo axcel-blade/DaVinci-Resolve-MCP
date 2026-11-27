@@ -2,7 +2,7 @@ import { join } from "node:path";
 import { z } from "zod";
 import { frameStats } from "../../utils/media-probe.js";
 import { COLOR_PRESETS, type LookParams } from "../../design-engine/presets/presets.js";
-import { absPath, ItemRef, ItemRefSchema, timelineArg, type ToolContext, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { absPath, ItemRef, ItemRefSchema, timelineArg, type ToolContext, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const rgb = z.tuple([z.number(), z.number(), z.number()]);

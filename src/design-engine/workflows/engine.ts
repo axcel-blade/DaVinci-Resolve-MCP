@@ -1,4 +1,4 @@
-import type { ToolContext, ToolResult } from "../../mcp/tools/common.js";
+import type { ToolContext, ToolResult } from "../../mcp/tools/registry.js";
 import { toToolError } from "../../utils/errors.js";
 import { logger } from "../../utils/logger.js";
 

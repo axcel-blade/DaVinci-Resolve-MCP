@@ -1,4 +1,30 @@
-# API Support Matrix
+# Supported Features
+
+Summary by module. Per-tool details and schemas: [TOOLS.md](TOOLS.md). Status legend: ✅ supported · ◐ partial (documented approximation) · ☁ requires an external provider · ✖ unsupported (honest error + alternative).
+
+| Module | Highlights |
+|---|---|
+| 1. Application | ✅ status, scripting-connection check, launch, close (confirm), version, capabilities probe, application and system info, current project, get/set page |
+| 2. Projects | ✅ create, open, save, save as, close, delete (confirm, backup first), duplicate, rename, info, list, settings get/set (read back), timelines, backup, list backups, restore |
+| 3. Media | ✅ import files/folders/video/audio/images/sequences, list, bins, search, info, metadata, rename, move, delete, missing media, relink, probe (FFmpeg), link proxy, replace, clip color/flag/rating, markers, in/out, duplicates, organize by type, auto-sync audio, transcribe, storage volumes · ✖ proxy/optimized generation |
+| 4. Timeline | ✅ create (custom resolution/fps), delete, duplicate, rename, open, list, info, settings, tracks (add/delete/set), clips, duration, start timecode, playhead, compound/nested/Fusion clips, EDL/XML/AAF export, import, markers |
+| 5. Editing | ✅ append, add, insert, overwrite, replace, split, trim, move, position, in/out, duration, delete, duplicate, copy/paste, paste attributes, delete gaps, export frame, properties, opacity, transform, crop, rotation, zoom, composite mode, A/V link, enable, clip color, markers, stabilize, Smart Reframe, reverse, freeze frame, speed, generators |
+| 6. Effects & transitions | ✅ list/search/apply/remove ResolveFX, applied effects, enable, Fusion effect parameters, transitions add/remove/configure, adjustment clips |
+| 7. Speed | ✅ constant speed, reverse, freeze, optical flow, info · ◐ speed ramps and retime curves (Fusion time-speed) |
+| 8. Titles | ✅ text+ titles, edit text/font/size/color/position/alignment/background/animation, lower thirds, intros, outros, credits, scrolling text, presets (Fusion) |
+| 9. Subtitles | ✅ subtitle tracks, SRT import/export, read all, generate from audio (Studio, or provider fallback) · ✖ editing individual subtitle items |
+| 10. Fusion | ✅ compositions, nodes create/delete/connect, inputs, text and 3D text, backgrounds, merges, transforms, masks, chroma key, particles, camera, lights, 3D scenes, keyframes, animations, expressions, graph builder, macros, templates, comp import/export, render |
+| 11. Color | ✅ nodes (list, enable, label), CDL, lift/gamma/gain/offset, saturation, contrast, temperature, tint, exposure, LUTs (apply, generate, export), copy/paste grades, shot match, auto balance, scopes, Magic Mask, looks, versions, groups, stills · ✖ creating/deleting nodes, power windows, tracking |
+| 12. Fairlight audio | ✅ tracks, place/move/trim/split clips, volume, gain, pan, pitch, dialogue leveler, effects, EQ, dynamics, reverb, delay, noise reduction, normalize, Fairlight presets, dialogue cleanup, sync, mix, loudness analysis (FFmpeg) · ✖ fades, voice-over recording |
+| 13. AI | ✅ footage analysis, scene and object detection, media search, editing plans, best clips, rough cuts, highlights, social cuts, transition and grade suggestions, audio analysis, shot lists, silence removal · ☁ transcription, AI subtitles, voice-over (OpenAI-compatible provider) · ✖ speaker detection |
+| 14. Photo page | ✅ support check, import, albums, list, info, edit, crop, exposure, contrast, saturation, white balance, CDL, LUT, effects, grades, ratings, export, from media pool (Resolve 21+) |
+| 15. Rendering | ✅ settings, formats/codecs, presets (list/save/import), jobs (add/remove/queue/status), start, cancel, export timeline/clip/batch, output verification · ✖ pause |
+| 16. Workflows | ✅ YouTube video, advertisement, social content, documentary, cinematic video — plan with `dryRun: true`, then run |
+| 17. Background jobs & meta | ✅ `background: true` on long tools; `get_job`, `wait_for_job`, `list_jobs`, `cancel_job`; `mcp_list_tools`, `mcp_recent_operations`, `mcp_bridge_status` |
+
+Everything is tested against the mock adapter; the bridge and the most-used ops passed a live run against DaVinci Resolve Studio 21.2 ([TEST_REPORT.md](TEST_REPORT.md)). See [LIMITATIONS.md](LIMITATIONS.md) for what is approximate or unavailable.
+
+## Detailed matrix
 
 What each feature area uses, and what is **tested** vs **implemented but not live-tested**.
 Verified against **DaVinci Resolve Studio 21.2.0.5** on Windows 11 (see [TEST_REPORT.md](TEST_REPORT.md)).
@@ -8,7 +34,7 @@ Every Resolve 20/21 method is probed before use, so older versions get `status: 
 Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 3 = another documented integration (FFmpeg, files, OpenAI-compatible provider), 4 = controlled UI automation (not used anywhere), 5 = not supported.
 **Tested**: ✅ live-tested on 21.2 · 🧪 unit/integration tested only · ⬜ implemented, not yet live-tested.
 
-## Application & projects
+### Application & projects
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -21,7 +47,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Backup / restore | 1 | ✅ backup | `.drp` export; restore via ImportProject / RestoreProject (`.dra`) |
 | Project settings (resolution, fps, color science, audio) | 1 | ✅ | Each key read back after SetSetting |
 
-## Media
+### Media
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -35,7 +61,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Clip rating | 1 (metadata) | ⬜ | Metadata write verified by readback; photo ratings use `SetRatings` |
 | Auto-sync audio, transcription | 1 | ⬜ | Studio features |
 
-## Timeline & editing
+### Timeline & editing
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -56,7 +82,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Markers | 1 | 🧪 | |
 | Stabilize / Smart Reframe | 1 | ⬜ | Studio |
 
-## Effects, transitions, titles, subtitles
+### Effects, transitions, titles, subtitles
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -72,7 +98,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Auto subtitles | 1 | ⬜ | `CreateSubtitlesFromAudio` (Studio); or provider transcription → SRT |
 | Edit/retime/style individual captions | 5 | — | Edit as SRT and re-import, or Inspector |
 
-## Fusion
+### Fusion
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -84,7 +110,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Fusion tool registry | 2 (Lua via fuscript) | ✅ | 620 tools listed |
 | Comp render | 2 | ⬜ | Inside Resolve comps render with the timeline (Deliver) |
 
-## Color
+### Color
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -97,7 +123,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Add/delete nodes, wheels, curves, qualifiers, power windows, tracker, Shot Match | 5 | — | Not scriptable; tools return alternatives (DRX/PowerGrade, Fusion masks, CopyGrades, Auto Color) |
 | Scopes | 3 | ⬜ | Exported still + FFmpeg signalstats |
 
-## Fairlight / audio
+### Fairlight / audio
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -111,7 +137,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Fades, bus routing, automation, voiceover recording | 5 | — | Use audio transitions for fades |
 | Silence removal | 3 + 1 | ⬜ | FFmpeg silencedetect → cut list (review first) → re-placement |
 
-## AI
+### AI
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -123,7 +149,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Speaker detection | 5 | — | |
 | Magic Mask / Smart Reframe / Depth Map | 1 (mask, reframe) / 5 (depth) | ⬜ | |
 
-## Photo page (Resolve 21+)
+### Photo page (Resolve 21+)
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -133,7 +159,7 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Export | 1 | ✅ | `PhotoAlbumItem.ExportFrame` (jpg/png/tif, max dimension, quality) |
 | RAW decode settings | 5 | — | |
 
-## Rendering
+### Rendering
 
 | Feature | Level | Tested | Notes |
 |---|---|---|---|
@@ -144,6 +170,6 @@ Legend — **Level**: 1 = official Resolve scripting API, 2 = Fusion scripting, 
 | Output verification | 3 | ✅ | exists + size + ffprobe resolution/duration; never reports success without a file |
 | Free-space check | 3 | 🧪 | refuses with < 512 MB free |
 
-## Not used anywhere
+### Not used anywhere
 
 Controlled UI automation (level 4) is **not used**: every tool either calls a documented API, a documented external tool, or reports `unsupported` with a manual alternative.

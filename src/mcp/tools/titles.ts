@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { hexColor, ItemRef, timelineArg, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { hexColor, ItemRef, timelineArg, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 export const TitleStyle = z.object({
