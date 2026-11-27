@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.1.0 — 2026-11-27
+
 ### Changed
 - Restructured to match the Photoshop-MCP architecture: `src/mcp/tools/common.ts` is now `registry.ts`, shared argument schemas moved to `src/mcp/tools/args.ts` and `src/schemas/`, and `src/shared.ts` re-exports cross-cutting pieces.
 - `ResolveBridge` now runs every call through a `BridgeAdapter` (Python worker or mock), refuses ops not in the `BRIDGE_OPS` allowlist (`UNKNOWN_OP`) before Resolve is contacted, serialises calls in an `OperationQueue` (`BRIDGE_BUSY` when full), and keeps an operation history.
