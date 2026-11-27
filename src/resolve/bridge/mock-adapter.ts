@@ -1,5 +1,6 @@
 import { McpToolError } from "../../utils/errors.js";
 import type { InstallInfo } from "./detect.js";
+import type { BridgeAdapter } from "./types.js";
 
 type Handler = (params: Record<string, unknown>, state: MockState) => unknown;
 
@@ -17,7 +18,9 @@ interface MockState {
  * result produced through it is tagged source: "mock" so it can never be mistaken for real work.
  * Ops without a handler succeed with an echo payload ({ mock: true, op, params }).
  */
-export class MockResolve {
+export class MockResolve implements BridgeAdapter {
+  readonly name = "mock" as const;
+  readonly pending = 0;
   readonly calls: { op: string; params: unknown }[] = [];
   state: MockState = { page: "edit", projects: ["Untitled Project"], project: null, timelines: [], timeline: null };
   private overrides = new Map<string, Handler>();
@@ -26,6 +29,10 @@ export class MockResolve {
   /** Force a specific op to run a custom handler (throw inside it to simulate a Resolve error). */
   on(op: string, handler: Handler): void {
     this.overrides.set(op, handler);
+  }
+
+  async stop(): Promise<void> {
+    /* nothing to release */
   }
 
   installInfo(): InstallInfo {

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { runLuaHelper } from "../../resolve/bridge/lua-adapter.js";
-import { ItemRef, timelineArg, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { ItemRef, timelineArg, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 
 /** Fusion nodes usable with engine 'fusion' (validated by Fusion at AddTool time). */
 export const FUSION_EFFECTS: Record<string, { regId: string; description: string; keyInputs: string[] }> = {

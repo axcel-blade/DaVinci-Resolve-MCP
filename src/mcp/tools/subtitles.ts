@@ -2,7 +2,7 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import { AiProvider, segmentsToSrt } from "../../utils/ai-provider.js";
-import { absPath, timelineArg, type ToolRegistry, clean, run } from "./common.js";
+import { absPath, timelineArg, type ToolRegistry, clean, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 
 const WHY = "the scripting API cannot create or edit individual subtitle items.";

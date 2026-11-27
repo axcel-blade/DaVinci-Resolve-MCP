@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ASPECTS } from "../../design-engine/presets/presets.js";
-import type { ToolRegistry } from "./common.js";
+import type { ToolRegistry } from "./registry.js";
 import { stdSteps, WorkflowInput } from "../../design-engine/workflows/common.js";
 import { runWorkflow, type StepCtx } from "../../design-engine/workflows/engine.js";
 

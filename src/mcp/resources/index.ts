@@ -1,7 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { FUSION_EFFECTS } from "../tools/effects.js";
 import { COLOR_PRESETS, EXPORT_PRESETS } from "../../design-engine/presets/presets.js";
-import type { ToolContext } from "../tools/common.js";
+import type { ToolContext } from "../tools/registry.js";
 
 type Source = (ctx: ToolContext) => Promise<unknown>;
 

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { AiProvider, segmentsToSrt } from "../../utils/ai-provider.js";
 import { detectScenes, frameStats, loudness, probe, silences, toolAvailable } from "../../utils/media-probe.js";
 import { buildEditPlan, keepRanges, scoreClips, suggestLook, suggestTransitions, type ClipInfo, type EditPlan } from "../../design-engine/planner/planner.js";
-import { clipRef, ItemRef, timelineArg, type ToolContext, type ToolRegistry, clean, itemRef, run } from "./common.js";
+import { clipRef, ItemRef, timelineArg, type ToolContext, type ToolRegistry, clean, itemRef, run } from "./registry.js";
 import { McpToolError } from "../../utils/errors.js";
 import { secondsToFrames } from "../../utils/timecode.js";
 

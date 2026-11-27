@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { JobRecord } from "../../jobs/job-manager.js";
-import type { ToolRegistry, ToolResult } from "./common.js";
+import type { ToolRegistry, ToolResult } from "./registry.js";
 
 const jobIdArg = z.string().min(1).max(64).describe("Id returned by a tool called with background: true");
 

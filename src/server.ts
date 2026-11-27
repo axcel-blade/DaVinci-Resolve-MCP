@@ -8,7 +8,7 @@ import { registerResources } from "./mcp/resources/index.js";
 import { AuditLog } from "./utils/audit.js";
 import { PathPolicy } from "./utils/paths.js";
 import { buildRegistry } from "./mcp/tools/index.js";
-import type { ToolContext, ToolRegistry, ToolResult } from "./mcp/tools/common.js";
+import type { ToolContext, ToolRegistry, ToolResult } from "./mcp/tools/registry.js";
 
 export const SERVER_INFO = { name: SERVER_NAME, version: SERVER_VERSION };
 

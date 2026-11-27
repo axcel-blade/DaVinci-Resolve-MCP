@@ -14,7 +14,7 @@
 | Question or how-to | [Discussions → Q&A](https://github.com/axcel-blade/DaVinci-Resolve-MCP/discussions) |
 | Idea or feature request | [Discussions → Ideas](https://github.com/axcel-blade/DaVinci-Resolve-MCP/discussions) or a feature-request issue |
 | Bug | [New issue → Bug report](https://github.com/axcel-blade/DaVinci-Resolve-MCP/issues/new/choose) |
-| Works/doesn't work on your Resolve version | DaVinci Resolve compatibility issue template |
+| Works/doesn't work on your DaVinci Resolve version | DaVinci Resolve compatibility issue template |
 | Security problem | [SECURITY.md](SECURITY.md) — never a public issue |
 
 When asking, include your OS (Windows/macOS), Node.js, pnpm, Python and DaVinci Resolve versions, the client (Claude Desktop / ChatGPT),

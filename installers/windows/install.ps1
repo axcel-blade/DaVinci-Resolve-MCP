@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   One-line installer for DaVinci Resolve MCP on Windows.
 .DESCRIPTION
@@ -113,13 +113,13 @@ function Register-McpClients([string]$Entry) {
   $useCli = $env:RESOLVE_MCP_SKIP_CLI_CLIENTS -ne '1'
   if ($useCli -and (Get-Command claude -ErrorAction SilentlyContinue)) {
     [void](Invoke-Quiet { claude mcp remove --scope user $ServerName })
-    if (Invoke-Quiet { claude mcp add --scope user $ServerName -e RESOLVE_ADAPTER="python" -- node $Entry }) { Write-Ok 'Claude Code (user scope)'; $done.Add('Claude Code') }
+    if (Invoke-Quiet { claude mcp add --scope user $ServerName -e RESOLVE_ADAPTER=python -- node $Entry }) { Write-Ok 'Claude Code (user scope)'; $done.Add('Claude Code') }
     else { Write-Warning "Claude Code: 'claude mcp add' failed. Add '$ServerName' manually." }
   }
   $codexDone = $false
   if ($useCli -and (Get-Command codex -ErrorAction SilentlyContinue)) {
     [void](Invoke-Quiet { codex mcp remove $ServerName })
-    if (Invoke-Quiet { codex mcp add $ServerName --env RESOLVE_ADAPTER="python" -- node $Entry }) { Write-Ok 'Codex'; $done.Add('Codex'); $codexDone = $true }
+    if (Invoke-Quiet { codex mcp add $ServerName --env RESOLVE_ADAPTER=python -- node $Entry }) { Write-Ok 'Codex'; $done.Add('Codex'); $codexDone = $true }
   }
   $toml = Join-Path $env:USERPROFILE '.codex\config.toml'
   if (-not $codexDone -and (Test-Path (Split-Path $toml))) {

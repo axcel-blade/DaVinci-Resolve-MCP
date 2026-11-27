@@ -1,6 +1,6 @@
 ---
 name: DaVinci Resolve compatibility report
-about: Share live-test results for your DaVinci Resolve version
+about: Share integration-test results for your DaVinci Resolve version
 title: "[Compat] DaVinci Resolve <version>"
 labels: compatibility
 assignees: ""
@@ -13,9 +13,9 @@ assignees: ""
 - Python version (`python --version`):
 - Commit or release:
 
-## Live test
+## Integration test
 
-Ran `pnpm test:live`: yes / no
+Ran `scripts\integration-test.ps1`: yes / no
 
 Overall status from `output/live-test/live-report.json`: passed / failed / blocked
 
